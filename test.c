@@ -1,0 +1,84 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   test.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nbled <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/04 02:51:46 by nbled             #+#    #+#             */
+/*   Updated: 2022/09/04 02:51:50 by nbled            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "minishell.h"
+
+int	main(void)
+{
+	while (1)
+	{
+		
+		readline(BLUE"minishell >>> "GREEN);
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// int	main(int argc, char **argv)
+// {
+// 	t_pile	*start;
+// 	t_pile	*tmp;
+// 	int		i;
+
+// 	i = 1;
+// 	start = ft_lstnew(0, argv[0]);
+
+// 	while (i < argc)
+// 	{
+// 		tmp = ft_lstnew(i, argv[i]);
+// 		ft_lstadd_back(&start, tmp);
+// 		i++;
+// 	}
+
+// 	tmp = start;
+// 	while (tmp->next)
+// 	{
+// 		printf("maillon "RED"%d = %s\n"END, tmp->value, tmp->str);
+// 		tmp = tmp->next;
+// 	}
+// 	printf("maillon "RED"%d = %s\n"END, tmp->value, tmp->str);
+
+// 	while (tmp->prev)
+// 	{
+// 		printf("maillon "BLUE"%d = %s\n"END, tmp->value, tmp->str);
+// 		tmp = tmp->prev;
+// 	}
+// 	printf("maillon "BLUE"%d = %s\n"END, tmp->value, tmp->str);
+
+// 	ft_lstclear(start);
+// }
