@@ -17,6 +17,7 @@ SRCS =	ft_lstnew.c \
 		ft_lstsize.c \
 		ft_lstlast.c \
 		ft_lstclear.c \
+		ft_split.c \
 		test.c 
 
 OBJS = $(SRCS:.c=.o)
