@@ -53,8 +53,8 @@ void	ft_lstadd_back(t_pile **pile, t_pile *n);
 size_t	ft_lstsize(t_pile *pile);
 t_pile	*ft_lstlast(t_pile *pile);
 void	ft_lstclear(t_pile *start);
-char	**ft_split(const char *s, char c);
-size_t	count_words(const char *s, char c);
-int	quote_check(char *str);
+char	**ft_split(const char *s);
+size_t	ft_count_words(const char *s);
+int		quote_check(char *str);
 
 #endif

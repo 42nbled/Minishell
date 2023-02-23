@@ -19,12 +19,12 @@ int	quote_check(char *str)
 	i = -1;
 	while (str[++i])
 	{
-		if (str[i] == 39)
-			while (str[++i] != 39)
+		if (str[i] == '"')
+			while (str[++i] != '"')
 				if (!str[i])
 					return (1);
-		if (str[i] == 34)
-			while (str[++i] != 34)
+		if (str[i] == '\'')
+			while (str[++i] != '\'')
 				if (!str[i])
 					return (1);
 	}

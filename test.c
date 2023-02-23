@@ -27,15 +27,14 @@ int	main(void)
 		str = readline(BLUE"minishell : "END);
 		if (str[0] && quote_check(str) == 0)
 		{
-			splited = ft_split(str, ' ');
+			splited = ft_split(str);
 			start = ft_lstnew(0, splited[0]);
-			while (i < count_words(str, ' '))
+			while (i < ft_count_words(str))
 			{
 				tmp = ft_lstnew(i, splited[i]);
 				ft_lstadd_back(&start, tmp);
 				i++;
 			}
-
 			tmp = start;
 			while (tmp->next)
 			{

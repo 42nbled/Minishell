@@ -12,87 +12,151 @@
 
 #include "minishell.h"
 
-size_t	count_words(const char *s, char c)
+int	isasep(const char c)
+{
+	if (c == 39)
+		return (1);
+	if (c == 34)
+		return (1);
+	if (c == '<')
+		return (1);
+	if (c == '>')
+		return (1);
+	if (c == '|')
+		return (1);
+	return (0);
+}
+
+size_t	ft_count_words(const char *s)
 {
 	size_t	words;
-	int		state;
+	int		quote;
+	int		i;
 
+	i = 0;
+	quote = 0;
 	words = 0;
-	state = 1;
-	while (s && *s)
+	while (s[i])
 	{
-		if (*s == c)
-			state = 1;
-		else if (state == 1)
+		while (s[i] && s[i] == ' ')
+			i++;
+		if (s[i] && s[i] != ' ')
 		{
 			words++;
-			state = 0;
+			if (s[i] == 39)
+			{
+				i++;
+				while (s[i] && s[i] != 39)
+					i++;
+				i++;
+			}
+			else if (s[i] == 34)
+			{
+				i++;
+				while (s[i] && s[i] != 34)
+					i++;
+				i++;
+			}
+			else if (isasep(s[i]))
+			{
+				i++;
+				if (s[i] && s[i - 1] && s[i] == '<' && s[i - 1] == '<')
+					i++;
+				if (s[i] && s[i - 1] && s[i] == '>' && s[i - 1] == '>')
+					i++;
+			}
+			else
+				while (s[i] && s[i] != ' ' && !isasep(s[i]))
+					i++;
 		}
-		s++;
 	}
 	return (words);
 }
 
-size_t	sizeof_word(const char *s, char c)
+size_t	ft_str_len(char const *s)
 {
-	size_t	i;
-
-	i = 0;
-	while (s[i] && (s[i] != c))
-		i++;
-	return (i);
-}
-
-char	**free_tab(char **tab, size_t size)
-{
-	size_t	i;
-
-	i = 0;
-	while (i < size)
-		free(tab[i++]);
-	free(tab);
-	return (0);
-}
-
-void	free_split(char **args)
-{
-	int	size;
 	int	i;
 
 	i = 0;
-	size = 0;
-	while (args[size])
-		size++;
-	while (i < size)
-		free(args[i++]);
-	free(args);
+	if (s[i] == 39)
+	{
+		i++;
+		while(s[i] && s[i] != 39)
+			i++;
+		i++;
+	}
+	else if (s[i] == 34)
+	{
+		i++;
+		while(s[i] && s[i] != 34)
+			i++;
+		i++;
+	}
+	else if (isasep(s[i]))
+	{
+		i++;
+		if (s[i] && s[i - 1] && s[i] == '<' && s[i - 1] == '<')
+			i++;
+		if (s[i] && s[i - 1] && s[i] == '>' && s[i - 1] == '>')
+			i++;
+	}
+	else
+		while (s[i] && s[i] != ' ' && !isasep(s[i]))
+			i++;
+	return (i);
 }
 
-char	**ft_split(const char *s, char c)
+char	**ft_split(const char *s)
 {
 	char	**tab;
-	size_t	index;
+	int		size;
 	size_t	i;
+	int		j;
+	int		k;
 
+	i = 0;
+	j = 0;
 	if (!s)
 		return (NULL);
-	tab = malloc(sizeof(char *) * (count_words(s, c) + 1));
+	size = ft_count_words(s);
+	tab = malloc(sizeof(char *) * (size + 1));
 	if (!tab)
 		return (NULL);
-	index = 0;
-	while (count_words(s, c))
+	while (i < ft_count_words(s))
 	{
-		while (*s == c)
-			s++;
-		tab[index] = malloc(sizeof(char) * (sizeof_word(s, c) + 1));
-		if (!tab[index])
-			return (free_tab(tab, index));
-		i = 0;
-		while (*s && (*s != c))
-			tab[index][i++] = *s++;
-		tab[index][i] = 0;
-		index++;
+		while (s[j] && s[j] == ' ')
+			j++;
+		tab[i] = malloc(ft_str_len(s + j) + 1);
+		k = 0;
+
+		if (s[j] == 39)
+		{
+			j++;
+			while (s[j] && s[j] != 39)
+				tab[i][k++] = s[j++];
+			j++;
+		}
+		else if (s[j] == 34)
+		{
+			j++;
+			while (s[j] && s[j] != 34)
+				tab[i][k++] = s[j++];
+			j++;
+		}
+		else if (isasep(s[j]))
+		{
+			tab[i][k++] = s[j++];
+			if (s[j] && s[j - 1] && s[j] == '<' && s[j - 1] == '<')
+				tab[i][k++] = s[j++];
+			if (s[j] && s[j - 1] && s[j] == '>' && s[j - 1] == '>')
+				tab[i][k++] = s[j++];
+		}
+		else
+			while (s[j] && s[j] != ' ' && !isasep(s[j]))
+				tab[i][k++] = s[j++];
+		tab[i][k] = '\0';
+		i++;
 	}
-	tab[index] = 0;
+	tab[i] = NULL;
 	return (tab);
 }
