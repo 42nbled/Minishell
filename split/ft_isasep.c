@@ -1,32 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   quote_check.c                                      :+:      :+:    :+:   */
+/*   ft_isasep.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nbled <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/23 02:51:46 by nbled             #+#    #+#             */
-/*   Updated: 2022/02/23 02:51:50 by nbled            ###   ########.fr       */
+/*   Created: 2023/02/23 08:27:19 by nbled             #+#    #+#             */
+/*   Updated: 2023/02/23 08:27:20 by nbled            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
-int	quote_check(char *str)
+int	isasep(const char c)
 {
-	int	i;
-
-	i = -1;
-	while (str[++i])
-	{
-		if (str[i] == '"')
-			while (str[++i] != '"')
-				if (!str[i])
-					return (1);
-		if (str[i] == '\'')
-			while (str[++i] != '\'')
-				if (!str[i])
-					return (1);
-	}
+	if (c == 39)
+		return (1);
+	if (c == 34)
+		return (1);
+	if (c == '<')
+		return (1);
+	if (c == '>')
+		return (1);
+	if (c == '|')
+		return (1);
 	return (0);
 }

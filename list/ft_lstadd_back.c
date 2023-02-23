@@ -1,32 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   quote_check.c                                      :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nbled <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/23 02:51:46 by nbled             #+#    #+#             */
-/*   Updated: 2022/02/23 02:51:50 by nbled            ###   ########.fr       */
+/*   Created: 2023/02/23 08:19:28 by nbled             #+#    #+#             */
+/*   Updated: 2023/02/23 08:19:30 by nbled            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
-int	quote_check(char *str)
+void	ft_lstadd_back(t_pile **pile, t_pile *n)
 {
-	int	i;
+	t_pile	*ptr;
 
-	i = -1;
-	while (str[++i])
+	if (!pile || !n)
+		return ;
+	if (!(*pile))
 	{
-		if (str[i] == '"')
-			while (str[++i] != '"')
-				if (!str[i])
-					return (1);
-		if (str[i] == '\'')
-			while (str[++i] != '\'')
-				if (!str[i])
-					return (1);
+		*pile = n;
+		return ;
 	}
-	return (0);
+	ptr = *pile;
+	while (ptr->next)
+		ptr = ptr->next;
+	ptr->next = n;
+	n->prev = ptr;
 }

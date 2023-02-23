@@ -39,7 +39,6 @@
 # include <sys/ioctl.h>
 # include <termios.h>
 
-
 typedef struct s_pile
 {
 	int				value;
@@ -48,13 +47,29 @@ typedef struct s_pile
 	struct s_pile	*next;
 }					t_pile;
 
+// ----------------------------------------------------
+//	LIST
+// ----------------------------------------------------
+
 t_pile	*ft_lstnew(int value, char *str);
-void	ft_lstadd_back(t_pile **pile, t_pile *n);
-size_t	ft_lstsize(t_pile *pile);
 t_pile	*ft_lstlast(t_pile *pile);
+size_t	ft_lstsize(t_pile *pile);
+void	ft_lstadd_back(t_pile **pile, t_pile *n);
 void	ft_lstclear(t_pile *start);
-char	**ft_split(const char *s);
+
+// ----------------------------------------------------
+//	SPLIT
+// ----------------------------------------------------
+
 size_t	ft_count_words(const char *s);
+size_t	ft_str_len(char const *s);
+char	**ft_split(const char *s);
+int		isasep(const char c);
+
+// ----------------------------------------------------
+//	OTHER
+// ----------------------------------------------------
+
 int		quote_check(char *str);
 
 #endif

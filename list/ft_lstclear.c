@@ -1,32 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   quote_check.c                                      :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nbled <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/23 02:51:46 by nbled             #+#    #+#             */
-/*   Updated: 2022/02/23 02:51:50 by nbled            ###   ########.fr       */
+/*   Created: 2023/02/23 08:20:02 by nbled             #+#    #+#             */
+/*   Updated: 2023/02/23 08:20:04 by nbled            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
-int	quote_check(char *str)
+void	ft_lstclear(t_pile *start)
 {
-	int	i;
+	t_pile	*tmp;
+	t_pile	*ptr;
 
-	i = -1;
-	while (str[++i])
+	ptr = start;
+	while (ptr)
 	{
-		if (str[i] == '"')
-			while (str[++i] != '"')
-				if (!str[i])
-					return (1);
-		if (str[i] == '\'')
-			while (str[++i] != '\'')
-				if (!str[i])
-					return (1);
+		tmp = ptr->next;
+		free(ptr);
+		ptr = tmp;
 	}
-	return (0);
 }

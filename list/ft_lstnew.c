@@ -1,32 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   quote_check.c                                      :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nbled <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/23 02:51:46 by nbled             #+#    #+#             */
-/*   Updated: 2022/02/23 02:51:50 by nbled            ###   ########.fr       */
+/*   Created: 2023/02/23 08:19:08 by nbled             #+#    #+#             */
+/*   Updated: 2023/02/23 08:19:11 by nbled            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
-int	quote_check(char *str)
+t_pile	*ft_lstnew(int value, char *str)
 {
-	int	i;
+	t_pile	*n;
 
-	i = -1;
-	while (str[++i])
-	{
-		if (str[i] == '"')
-			while (str[++i] != '"')
-				if (!str[i])
-					return (1);
-		if (str[i] == '\'')
-			while (str[++i] != '\'')
-				if (!str[i])
-					return (1);
-	}
-	return (0);
+	n = malloc(sizeof(t_pile));
+	if (!n)
+		return (NULL);
+	n->value = value;
+	n->str = str;
+	n->prev = NULL;
+	n->next = NULL;
+	return (n);
 }
