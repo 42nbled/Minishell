@@ -25,24 +25,26 @@ int	main(void)
 	{
 		i = 1;
 		str = readline(BLUE"minishell : "END);
-		splited = ft_split(str, ' ');
-		start = ft_lstnew(0, splited[0]);
-		while (i < count_words(str, ' '))
+		if (str[0] && quote_check(str) == 0)
 		{
-			tmp = ft_lstnew(i, splited[i]);
-			ft_lstadd_back(&start, tmp);
-			i++;
-		}
+			splited = ft_split(str, ' ');
+			start = ft_lstnew(0, splited[0]);
+			while (i < count_words(str, ' '))
+			{
+				tmp = ft_lstnew(i, splited[i]);
+				ft_lstadd_back(&start, tmp);
+				i++;
+			}
 
-		tmp = start;
-		while (tmp->next)
-		{
+			tmp = start;
+			while (tmp->next)
+			{
+				printf("maillon "RED"%d = %s\n"END, tmp->value, tmp->str);
+				tmp = tmp->next;
+			}
 			printf("maillon "RED"%d = %s\n"END, tmp->value, tmp->str);
-			tmp = tmp->next;
+			ft_lstclear(start);
 		}
-		printf("maillon "RED"%d = %s\n"END, tmp->value, tmp->str);
-		ft_lstclear(start);
-			
 	}
 }
 

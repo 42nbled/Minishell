@@ -55,5 +55,6 @@ t_pile	*ft_lstlast(t_pile *pile);
 void	ft_lstclear(t_pile *start);
 char	**ft_split(const char *s, char c);
 size_t	count_words(const char *s, char c);
+int	quote_check(char *str);
 
 #endif
